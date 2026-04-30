@@ -512,7 +512,7 @@ class _MainNavigationState extends State<MainNavigation> {
           key: ValueKey('feed'),
         );
       case 2:
-        return PostScreen(onSubmit: _addPost, key: ValueKey('post'));
+        return PostScreen(onSubmit: _addPost, userProfile: _userProfile, key: ValueKey('post'));
       case 3:
         return const FindFriendsScreen(key: ValueKey('friends'));
       case 4:
@@ -1336,6 +1336,15 @@ class _FeedScreenState extends State<FeedScreen> {
     final isLiked = post.isLikedByMe;
     final isFavorited = post.isFavoritedByMe;
 
+    // Always resolve the display name live so username changes propagate
+    // instantly to all posts — old and new — without mutating stored data.
+    final displayName = post.isUserPost
+        ? widget.userProfile.username
+        : (post.anonymousName ?? 'Anonymous');
+    final avatarLetter = displayName.isNotEmpty
+        ? displayName[0].toUpperCase()
+        : 'A';
+
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(16),
@@ -1355,7 +1364,7 @@ class _FeedScreenState extends State<FeedScreen> {
                 ),
                 child: Center(
                   child: Text(
-                    post.anonymousName?.substring(0, 1).toUpperCase() ?? 'A',
+                    avatarLetter,
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -1369,7 +1378,7 @@ class _FeedScreenState extends State<FeedScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      post.anonymousName ?? 'Anonymous',
+                      displayName,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: FrutigerAeroTheme.textDark,
@@ -1769,8 +1778,9 @@ class _FeedScreenState extends State<FeedScreen> {
 
 class PostScreen extends StatefulWidget {
   final Function(Post) onSubmit;
+  final UserProfile userProfile;
 
-  const PostScreen({super.key, required this.onSubmit});
+  const PostScreen({super.key, required this.onSubmit, required this.userProfile});
 
   @override
   State<PostScreen> createState() => _PostScreenState();
@@ -2021,7 +2031,7 @@ class _PostScreenState extends State<PostScreen> {
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       title: _titleController.text.trim(),
       content: _contentController.text.trim(),
-      anonymousName: 'You',
+      anonymousName: widget.userProfile.username,
       timestamp: DateTime.now(),
       likes: 0,
       favorites: 0,
