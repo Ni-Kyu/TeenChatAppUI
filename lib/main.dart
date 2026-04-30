@@ -590,7 +590,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: double.infinity,
       child: SingleChildScrollView(
@@ -2856,7 +2856,7 @@ class _ParticlePainter extends CustomPainter {
 }
 
 class _LogOutText extends StatefulWidget {
-  const _LogOutText({super.key});
+  const _LogOutText();
 
   @override
   State<_LogOutText> createState() => _LogOutTextState();
