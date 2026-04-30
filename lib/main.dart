@@ -468,12 +468,17 @@ class _MainNavigationState extends State<MainNavigation> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: FrutigerAeroTheme.oceanBlue.withValues(alpha: 0.1),
+                        color: FrutigerAeroTheme.oceanBlue.withValues(
+                          alpha: 0.1,
+                        ),
                         blurRadius: 20,
                       ),
                     ],
                   ),
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 8,
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -590,7 +595,12 @@ class _HomeScreenState extends State<HomeScreen> {
       height: double.infinity,
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 120),
+        padding: const EdgeInsets.only(
+          left: 20,
+          right: 20,
+          top: 20,
+          bottom: 120,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -2905,7 +2915,8 @@ class BounceButton extends StatefulWidget {
   State<BounceButton> createState() => _BounceButtonState();
 }
 
-class _BounceButtonState extends State<BounceButton> with SingleTickerProviderStateMixin {
+class _BounceButtonState extends State<BounceButton>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
 
@@ -2916,9 +2927,10 @@ class _BounceButtonState extends State<BounceButton> with SingleTickerProviderSt
       vsync: this,
       duration: const Duration(milliseconds: 150),
     );
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.85).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _scaleAnimation = Tween<double>(
+      begin: 1.0,
+      end: 0.85,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override
@@ -2936,10 +2948,7 @@ class _BounceButtonState extends State<BounceButton> with SingleTickerProviderSt
         widget.onTap();
       },
       onTapCancel: () => _controller.reverse(),
-      child: ScaleTransition(
-        scale: _scaleAnimation,
-        child: widget.child,
-      ),
+      child: ScaleTransition(scale: _scaleAnimation, child: widget.child),
     );
   }
 }
