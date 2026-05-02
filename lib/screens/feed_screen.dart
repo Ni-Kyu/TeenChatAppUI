@@ -9,6 +9,7 @@ import '../theme/frutiger_aero_theme.dart';
 import '../models/post.dart';
 import '../models/user_profile.dart';
 import '../widgets/bounce_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FeedScreen extends StatefulWidget {
   final List<Post> posts;

@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import '../theme/frutiger_aero_theme.dart';
 import '../models/post.dart';
 import '../models/user_profile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PostScreen extends StatefulWidget {
   final Function(Post) onSubmit;

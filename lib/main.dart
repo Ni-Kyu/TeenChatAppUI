@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 // lib/main.dart
 //
 // Application entry point. Intentionally minimal — all structure lives in
