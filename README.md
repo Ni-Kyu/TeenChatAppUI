@@ -40,7 +40,7 @@ Make sure you have the following installed before running the app:
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repo-url>
+git clone <https://github.com/Ni-Kyu/TeenChatAppUI.git>
 cd flutter_application_1
 ```
 
